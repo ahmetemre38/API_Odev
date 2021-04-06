@@ -1,8 +1,7 @@
 let selectUsers = document.getElementsByClassName("dropdown-menu").item(0); 
 const usersInfo = axios.get('https://jsonplaceholder.typicode.com/users/');
-usersInfo.then(response => {   
-    let users = response.data;   
-    users.forEach(user => {
+usersInfo.then(response => {    
+    response.data.forEach(user => {
         let selectOption = document.createElement('li');
         selectOption.id = user.id;        
         selectUsers.appendChild(selectOption);
@@ -22,14 +21,9 @@ usersInfo.then(response => {
             };                   
             const taskInfo = axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${event.target.value}`);
             taskInfo.then(resTask => {
-                //console.log(resTask.data);                
-                let tasks = resTask.data; 
-                 tasks.forEach(task => {
+                resTask.data.forEach(task => {
                     let liTodo = document.createElement('li');
-                    //if(task.completed == true)
-                        liTodo.className = 'list-group-item list-group-item-success'; 
-                    //else if(task.completed == false) 
-                    //    liTodo.className = 'list-group-item list-group-item-danger';
+                    liTodo.className = 'list-group-item list-group-item-success'; 
                     liTodo.innerText = task.id + "-" + task.completed + "-" + task.title;      
                     ulTodos.appendChild(liTodo);
                  });
